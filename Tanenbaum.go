@@ -8,7 +8,7 @@ import (
 
 const (
 	numPhilosophers = 5
-	hungryCycles    = 3		// cada filosofo realiza 3 ciclos
+	hungryCycles    = 10		// cada filosofo realiza 3 ciclos
 )
 
 type PhilosopherState int
@@ -105,6 +105,9 @@ func right(id int) int {
 }
 
 func main() {
+
+	startTime := time.Now()
+
 	// Initialize condition variables for each philosopher
 	for i := 0; i < numPhilosophers; i++ {
 		condition[i] = sync.NewCond(&mutex)
@@ -117,7 +120,14 @@ func main() {
 		go philosopher.dine()
 	}
 
+	
 	// Wait for all philosophers to finish dining
 	wg.Wait()
+
+
+	endTime := time.Now()
+
+	elapsedTime := endTime.Sub(startTime)
 	fmt.Println("All philosophers are done dining.")
+	fmt.Println("Concurrent Time: ", elapsedTime)
 }

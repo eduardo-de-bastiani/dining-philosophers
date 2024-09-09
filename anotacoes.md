@@ -1,3 +1,5 @@
+> colocar um time.Sleep(time.Millisecond * 100) em todas as soluções
+
 ## Tanenbaum Otimizado:
 - impelmentação por estados: "thinking", "hungry", "eating"
 - usa semáforos binários (5)
