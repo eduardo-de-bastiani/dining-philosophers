@@ -108,6 +108,8 @@ func main() {
 
 	startTime := time.Now()
 
+	fmt.Println("Starting the philosophers dinner.")
+
 	// Initialize condition variables for each philosopher
 	for i := 0; i < numPhilosophers; i++ {
 		condition[i] = sync.NewCond(&mutex)

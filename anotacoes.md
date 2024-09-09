@@ -1,4 +1,5 @@
-> colocar um time.Sleep(time.Millisecond * 100) em todas as soluções
+> colocar time.Sleep(time.Millisecond * 100) para pensar
+> colocar time.Sleep(time.Millisecond * 100) para comer
 
 ## Tanenbaum Otimizado:
 - impelmentação por estados: "thinking", "hungry", "eating"
@@ -18,3 +19,7 @@ O filósofo que estava comendo entra em uma seção crítica para evitar condiç
 
 #### Problemas
 - pode ocorrer starvation em situações extremas
+
+___
+
+### 
