@@ -46,3 +46,10 @@ Estados para os filósofos (thinking, hungry, eating) e garfos (sujo, limpo)
 ### Problemas:
 - overhead de mensagens
 - solução de implementação complexa (coordenação assíncrona e manipulação de mensagens)
+
+
+Para compilar:
+> g++ -std=c++11 -o main main.cpp Graphics.cpp -lncurses
+
+Para rodar:
+> ./main
