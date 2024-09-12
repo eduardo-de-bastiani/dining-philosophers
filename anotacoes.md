@@ -49,7 +49,7 @@ Estados para os filósofos (thinking, hungry, eating) e garfos (sujo, limpo)
 
 
 Para compilar:
-> g++ -std=c++11 -o main main.cpp Graphics.cpp -lncurses
+> g++ -std=c++11 -o main main.cpp
 
 Para rodar:
 > ./main
