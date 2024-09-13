@@ -38,7 +38,7 @@ struct Fork {
     Synchronization synchronization;
 
 public:
-    Fork(const int fork_id, const int owner_id) :
+    Fork(const int fork_id, const int owner_id) :   
             id(fork_id), owner(owner_id), dirty(true) {}
 
     void request(int const owner_id) {
@@ -109,7 +109,8 @@ public:
         // std::adopt_lock parameter indicates that the mutexes are already locked and they should adopt the ownership of the existing lock
         std::lock_guard<std::mutex>  left_lock(left_fork.mutex, std::adopt_lock);
         std::lock_guard<std::mutex> right_lock(right_fork.mutex, std::adopt_lock);
-        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
 
         {
             std::lock_guard<std::mutex> cout_lock(cout_mutex);
@@ -120,7 +121,7 @@ public:
         thread_local std::uniform_int_distribution<> wait(2, 4);
         thread_local std::uniform_int_distribution<> dist(0, foods.size() - 1);
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(wait(random_generator) * 250));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         left_fork.done_using();
         right_fork.done_using();
@@ -142,7 +143,7 @@ public:
             std::cout << name << " is thinking" << std::endl;
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(wait(random_generator) * 150));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         should_think_next = false; // Set the state to eat next
     }
@@ -173,7 +174,21 @@ void dinnertime(int time_limit) {
 }
 
 int main(int argc, char **argv) {
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    std::cout << "Starting the Philosophers dinner." << std::endl;
+
     int time_limit = 15;
     dinnertime(time_limit);
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+
+    std::chrono::duration<double> elapsed = end - start;
+
+    std::cout << "All Philosophers are done dining." << std::endl;
+    std::cout << "Concurrent time: " << elapsed.count() << std::endl;
+
     return 0;
 }
