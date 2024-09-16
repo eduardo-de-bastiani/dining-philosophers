@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "iostream": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "/home/eduardo/OneDrive/4_semestre/fppd/t1/dining-philosophers/chandy-misra"
 }
