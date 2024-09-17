@@ -17,6 +17,7 @@
 #include <vector>
 #include <zconf.h>
 #include <random>
+#include <chrono>
 
 #include "philosopher.h"
 #include "fork.h"
@@ -121,7 +122,6 @@ int main(int argc, char *argv[])
     std::vector<pd::Philosopher *> philosophers;
     std::vector<pd::Fork *> forks;
 
-    std::cout << "Creating " << num << " philosophers........." << std::endl;
     for (int i = 0; i < num; i++)
     {
         forks.push_back(new pd::Fork(i + 1, i % num + 1, mutex_forks[i], topic));
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
     const std::chrono::time_point<std::chrono::steady_clock> start =
         std::chrono::steady_clock::now();
     /** Create threads and start work */
-    std::cout << "Start the Dinner!!" << std::endl;
+    std::cout << "Starting the philosophers dinner." << std::endl;
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
     // wait for all threads to complete their work
     for (int tid = 0; tid < num; tid++)
     {
-        std::cout << "Philosopher " << tid << " is done dining." << std::endl;
+        std::cout << "Philosopher " << tid+1 << " is done dining." << std::endl;
         int rc = pthread_join(threads[tid], NULL);
         if (rc)
         {
@@ -177,7 +177,9 @@ int main(int argc, char *argv[])
     const auto end = std::chrono::steady_clock::now();
     std::cout << "All philosophers are done dining." << std::endl;
 
-    std::cout << "Time taken: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " ms" << std::endl;
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::cout << "Time taken: " << elapsed_seconds.count() << " seconds" << std::endl;
+
 
     /** Release resources */
     for (int i = 0; i < num; i++)

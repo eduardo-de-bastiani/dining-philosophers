@@ -19,7 +19,7 @@ namespace pd {
             }
 
     void Philosopher::think() {
-        log(" is thinking ");
+        log(" is thinking.");
         usleep((unsigned int)randomNum(1000000));
     }
 
@@ -27,9 +27,8 @@ namespace pd {
         left_fork.request(id);
         right_fork.request(id);
 
-        log(" starts eating.");
+        log(" is eating.");
         usleep((unsigned int)randomNum(1000000));
-        log(" ends eating.");
 
         left_fork.clean();
         right_fork.clean();
